@@ -1,4 +1,4 @@
-### Hi there 👋
+### Special repository created to host the website.
 
 <!--
 **arthursteffens/arthursteffens** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
