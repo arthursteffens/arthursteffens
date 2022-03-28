@@ -1084,3 +1084,16 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+
+/* Custom */
+
+.portfolio-description > p {
+  text-indent: 5%;
+  text-align: justify;
+}
+
+.portfolio-description > h4 {
+  padding-top: 15px;
+}
+
