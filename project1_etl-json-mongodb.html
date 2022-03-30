@@ -131,15 +131,18 @@
               
 
                 <p>So we will use <b>johnny</b> collection from the <b>ninja</b> database.
-                After that, the code below counts how many <i>.json</i> files there are in the specified directory:</p>
+                After that, the code below specify the directory counts how many <i>.json</i> files there are in there:</p>
             <code><pre>
+            jsonPath = './json256k/'
+            file = os.listdir(jsonPath)
+
             countFiles = sum(1 for i in iglob(jsonPath + "*.json"))
             print("There are {} files in {} directory.".format(countFiles, jsonPath))
             </pre></code>
 
               <p>And we have the result:</p>
-            <code><pre>
-            There are 256093 files in ./json256k/ directory.</pre></code>
+            <samp><pre>
+            There are 256093 files in ./json256k/ directory.</pre></samp>
 
                 <p>Also, a modification is made to the JSON structure for better manipulation and visualization of the data. Each file is read, entered into a Python dictionary and saved in the proper format. The code is this:</p>
                 
