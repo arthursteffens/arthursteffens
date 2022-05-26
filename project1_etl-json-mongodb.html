@@ -147,48 +147,48 @@
                 <p>Also, a modification is made to the JSON structure for better manipulation and visualization of the data. Each file is read, entered into a Python dictionary and saved in the proper format. The code is this:</p>
                 
             <code><pre>
-        for i in range(countFiles):
-            file_json = jsonPath + file[i]
-            
-            if os.path.exists(file_json):
-                data = read_json(file_json)
+            for i in range(countFiles):
+                file_json = jsonPath + file[i]
                 
-                name = "Johnny #"+ str(i+1).zfill(6)
-                
-                # Create a dictionary
-                dict = {
-                    "name": name,
-                    }
-                
-                # Populate dictionary with json data
-                for j in range(7):
-                    tt = data["attributes"][j]["trait_type"]
-                    value = data["attributes"][j]["value"]
-                    dict[tt] = value
-                
-                # Save json file with modified information
-                with open(file_json, "w") as outfile:
-                    json.dump(dict, outfile)
-                    print("File {} modified".format(file[i]))
-                          
-            else:
-                print("No more files")
-                continues
+                if os.path.exists(file_json):
+                    data = read_json(file_json)
+                    
+                    name = "Johnny #"+ str(i+1).zfill(6)
+                    
+                    # Create a dictionary
+                    dict = {
+                        "name": name,
+                        }
+                    
+                    # Populate dictionary with json data
+                    for j in range(7):
+                        tt = data["attributes"][j]["trait_type"]
+                        value = data["attributes"][j]["value"]
+                        dict[tt] = value
+                    
+                    # Save json file with modified information
+                    with open(file_json, "w") as outfile:
+                        json.dump(dict, outfile)
+                        print("File {} modified".format(file[i]))
+                              
+                else:
+                    print("No more files")
+                    continues
               </pre></code>
 
                 <p>Thus, the files contain data in the following format:</p>
 
             <code><pre>
-              {
-            "name":"Johnny #000001",
-            "Background":"Purple",
-            "Legs":"Sweep kick",
-            "Body":"Tall",
-            "Eyes":"Suspicious eyes",
-            "Head":"Naruto headband",
-            "Arms":"Ninja star",
-            "Pets":"Hedgehog"
-              }
+            {
+                "name":"Johnny #000001",
+                "Background":"Purple",
+                "Legs":"Sweep kick",
+                "Body":"Tall",
+                "Eyes":"Suspicious eyes",
+                "Head":"Naruto headband",
+                "Arms":"Ninja star",
+                "Pets":"Hedgehog"
+            }
             </pre></code>
 
                 <p>It contains Name, Background, Legs, Body, Eyes, Head, Arms and Pets attributes.</p><br>
