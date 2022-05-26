@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Project Details</title>
+  <meta content="" name="Projects page">
+  <meta content="" name="projects">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: iPortfolio - v3.1.0
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <a href="index.html">
+        <img src="assets/img/arthur.png" alt="Arthur's profile picture" class="img-fluid rounded-circle">
+        <h1 class="text-light">Arthur Steffens</h1>
+        <p class="text-light" text-align: center>Data Engineer</p></a>
+        <div class="social-links mt-3 text-center">
+          <a href="https://linkedin.com/in/arthursteffens" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="index.html#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a href="index.html#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="index.html#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
+          <li><a href="index.html#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Projects</span></a></li>
+          <li><a href="index.html#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Project Details</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#portfolio">Projects</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper-container">
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/project3.png" alt="">
+                </div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="portfolio-description">
+              <h2>Data pipeline with Python, MySQL and AWS</h2>
+              <p>
+                In this project, I created an ETL process to move real estate data from the <a href="https://rapidapi.com/apidojo/api/realty-in-us/">RapidAPI website</a> to a relational database. With the API provided by that website, it was possible to access the data using Python and load it into the MySQL database. Finally, the entire process was transferred to the cloud and automated using AWS services.
+              </p>
+              <p>
+                The data extracted is about the sale and rental of properties, as well as the properties sold in New York City.
+                The complete code of this project are <a href="https://github.com/arthursteffens/personal-projects/tree/main/etl-pipeline-API-realty-python-aws_ENG">on Github</a>.
+              </p>
+
+              <h4>Environment</h4>
+              <p>
+                To execute this project, I used Python 3.10 language and MySQL 8 database. Also, I use <i>requests</i> package to extract data from the API, <i>pandas</i> for data manipulation and <i>pymysql</i> to connect to the database.  
+              </p>
+
+              <h4>Execution</h4>
+              <p>
+                Initially, some functions were defined for the better organization of the code. As an example, below is the <i>get_sales()</i> function, which returns data about sales.</p>
+
+            <code><pre>
+              def get_sales(city, state_code, limit):
+              url = "https://realty-in-us.p.rapidapi.com/properties/v2/list-for-sale"
+            
+              querystring = {"city":city,"state_code":state_code,"offset":"0","limit":limit,"sort":"relevance"}
+            
+              headers = {
+                "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
+                "X-RapidAPI-Key": "80d4101192msha3850ddbf66ba87p1c5dc9jsn7ad589c1b934"
+              }
+              try:
+                response_sale = pd.json_normalize(requests.request("GET", url, headers=headers, params=querystring).json(), record_path="properties", sep="_")
+                return response_sale
+              except:
+                print("Error")
+            </pre></code>
+              
+
+                <p><i>get_rents</i> and <i>get_sold</i> functions were also defined.<br><br>
+                  As some fields returned as NAN, the function to fill in the missing data was also defined:</p>
+            <code><pre>
+              # Funtion to fill NAN values in the whole dataframe
+              def fill_na(df):
+                  columns = df.columns.to_list()
+                  for col in columns:
+                      if df[col].dtype == 'object':
+                          df[col].fillna("NA", inplace=True)
+                      elif df[col].dtype == 'int64':
+                          df[col].fillna(1, inplace=True)
+                      elif df[col].dtype == 'float64':
+                          df[col].fillna(1.0, inplace=True)
+                  return df
+            </pre></code>
+
+              <h4>Extraction</h4>
+              <p>When executing the <i>get_sales</i> function, we get the following dataframe:</p>
+
+              <img src="assets/img/proj3/sales_df.png"> <br><br>
+
+              <p>
+                After doing the same with the rent and sales data, we run fill_na() function and check if there is still any NA value:
+              </p>
+
+              <img src="assets/img/proj3/is_na.png"> <br><br>
+
+              <p>Now we are all set to load the data into the database.</p> <br>
+
+              <h4>Load</h4>
+
+              <p>In this step, the cloud services from AWS were used. A MySQL instance was created using Amazon RDS.
+                Using the <i>pymysql</i> package, the code below makes the connection to the database and creates the schema called <i>realty</i>.</p>
+              
+                <code><pre>
+                  # Create a connection with the database service in local machine
+                  con = pymysql.connect(host ='db-realty.ctu8ks44oyou.us-east-1.rds.amazonaws.com', port=int(3306), user='admin', passwd='')
+
+                  # Creating a cursor object
+                  cursor = con.cursor()
+
+                  # Create a schema called realty
+                  cursor.execute('''
+                      DROP SCHEMA IF EXISTS realty;
+                  ''')
+
+                  cursor.execute('''
+                      CREATE SCHEMA realty;
+                  ''')
+
+                  # Use the new schema
+                  cursor.execute('''
+                      USE realty;
+                  ''')
+                </pre></code>
+
+                <p>After that, we create the sales, rents and sold tables. Below is an example of sales data table:</p>
+
+
+
+                <code><pre>
+                  # Create tables SALES
+                  cursor.execute('''
+                      CREATE TABLE sales (
+                          property_id VARCHAR(12),
+                          prop_type VARCHAR(20),
+                          prop_status VARCHAR(20),
+                          price INT,
+                          baths INT,
+                          beds FLOAT,
+                          address_city VARCHAR(50),
+                          address_line VARCHAR(200),
+                          address_state_code CHAR(2),
+                          address_state VARCHAR(50),
+                          address_county VARCHAR(50),
+                          addres_lat DOUBLE,
+                          address_lon DOUBLE,
+                          address_neighborhood_name VARCHAR(50)
+                      )
+                  ''')
+                </pre></code>
+
+                <p>To effectively load the data into the database, we run the code below for sales table, and the same is done for the other tables.</p>
+
+
+                <code><pre>
+                  # Convert the Dataframe into a list of arrays
+                  sales_tuples = tuple(sales.to_records(index=False))
+
+                  for data in range(len(sales_tuples)):
+                      
+                      # Create a new record
+                      query = "INSERT INTO sales (property_id, prop_type, prop_status, price, baths, beds, address_city, address_line, address_state_code, address_state, \
+                          address_county, addres_lat, address_lon, address_neighborhood_name) VALUES {}".format(sales_tuples[data])
+                      
+                      # Execute the query
+                      cursor.execute(query)
+                </pre></code>
+
+                <p>Finally, we commit and close the connection:</p>
+
+                <code><pre>
+                  # Commit
+                  con.commit()
+                  con.close()
+                </pre></code>
+
+                <h4>MySQL Workbench</h4>
+                <p>We can access the database using MySQL Workbench software for better data manipulation.
+                  Below is a sample:</p>
+
+                <img src="assets/img/proj3/workbench_connection.png"><br><br>
+
+                <p>We can see the data is there:</p>
+
+                <img src="assets/img/proj3/workbench_sales.png"><br><br>
+
+
+                <h4>AWS Lambda and Amazon EventBridge</h4>
+
+                <p>
+                  To automate the entire ETL process, I used AWS Lambda service, which allows us to run code without having a server. I created a lambda function and added all the code shown earlier. For the external packages to work, it was necessary to add layers through the ARN found <a href="https://github.com/keithrozario/Klayers/tree/master/deployments/python3.8">here</a>.
+                </p>
+
+                <img src="assets/img/proj3/lambda.png">
+
+                <p>After that, a rule was created in Amazon EventBridge (CloudWatch Events) to schedule and automate the execution of the script. In the example below, I scheduled the run for once a day at 6 AM using a Cron expression.</p>
+
+                <code><pre>
+                  Cron expression
+                  0 6 * * ? *
+
+                  Next 10 trigger date(s)
+
+                  Fri, 27 May 2022 06:00:00 GMT
+                  Sat, 28 May 2022 06:00:00 GMT
+                  . 
+                  . 
+                  .
+                </pre></code>
+
+
+                <h4>Next steps</h4>
+
+                <p>As the data collected contains latitude and longitude of the properties, it would be interesting to collect data about the regions of New York, such as crime or air quality, for example, to match with our data and get more complete information about a particular property.
+                  </p>
+                  <p>Also, we can use the same endpoint of our Amazon RDS database and make a dashboard in PowerBI or Tableau.
+                  </p>
+                  <p><i>Ps: I couldn't find examples of some data containing latitude and longitude. If you know, please email me.</i></p>
+
+
+            </div>
+          </div>
+
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category:</strong> Data Engineering - ETL</li>
+                <!-- <li><strong>Client:</strong>: ASU Company</li> -->
+                <li><strong>Project date:</strong> 25 May, 2022</li>
+                <li><strong>Project files:</strong> <a href="https://github.com/arthursteffens/personal-projects/tree/main/etl-json-mongodb-ninja_ENG">On Github</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="https://bootstrapmade.com/" class="link">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
