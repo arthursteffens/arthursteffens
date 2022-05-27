@@ -118,49 +118,49 @@
                 Initially, some functions were defined for the better organization of the code. As an example, below is the <i>get_sales()</i> function, which returns data about sales.</p>
 
             <code><pre>
-              def get_sales(city, state_code, limit):
-              url = "https://realty-in-us.p.rapidapi.com/properties/v2/list-for-sale"
-            
-              querystring = {"city":city,"state_code":state_code,"offset":"0","limit":limit,"sort":"relevance"}
-            
-              headers = {
-                "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
-                "X-RapidAPI-Key": "80d4101192msha3850ddbf66ba87p1c5dc9jsn7ad589c1b934"
-              }
-              try:
-                response_sale = pd.json_normalize(requests.request("GET", url, headers=headers, params=querystring).json(), record_path="properties", sep="_")
-                return response_sale
-              except:
-                print("Error")
+          def get_sales(city, state_code, limit):
+          url = "https://realty-in-us.p.rapidapi.com/properties/v2/list-for-sale"
+        
+          querystring = {"city":city,"state_code":state_code,"offset":"0","limit":limit,"sort":"relevance"}
+        
+          headers = {
+            "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
+            "X-RapidAPI-Key": "80d4101192msha3850ddbf66ba87p1c5dc9jsn7ad589c1b934"
+          }
+          try:
+            response_sale = pd.json_normalize(requests.request("GET", url, headers=headers, params=querystring).json(), record_path="properties", sep="_")
+            return response_sale
+          except:
+            print("Error")
             </pre></code>
               
 
                 <p><i>get_rents</i> and <i>get_sold</i> functions were also defined.<br><br>
                   As some fields returned as NAN, the function to fill in the missing data was also defined:</p>
             <code><pre>
-              # Funtion to fill NAN values in the whole dataframe
-              def fill_na(df):
-                  columns = df.columns.to_list()
-                  for col in columns:
-                      if df[col].dtype == 'object':
-                          df[col].fillna("NA", inplace=True)
-                      elif df[col].dtype == 'int64':
-                          df[col].fillna(1, inplace=True)
-                      elif df[col].dtype == 'float64':
-                          df[col].fillna(1.0, inplace=True)
-                  return df
+          # Funtion to fill NAN values in the whole dataframe
+          def fill_na(df):
+              columns = df.columns.to_list()
+              for col in columns:
+                  if df[col].dtype == 'object':
+                      df[col].fillna("NA", inplace=True)
+                  elif df[col].dtype == 'int64':
+                      df[col].fillna(1, inplace=True)
+                  elif df[col].dtype == 'float64':
+                      df[col].fillna(1.0, inplace=True)
+              return df
             </pre></code>
 
               <h4>Extraction</h4>
               <p>When executing the <i>get_sales</i> function, we get the following dataframe:</p>
 
-              <img src="assets/img/proj3/sales_df.png"> <br><br>
+              <img src="assets/img/proj3/sales_df.png" class="img-fluid"> <br><br>
 
               <p>
                 After doing the same with the rent and sales data, we run fill_na() function and check if there is still any NA value:
               </p>
 
-              <img src="assets/img/proj3/is_na.png"> <br><br>
+              <img src="assets/img/proj3/is_na.png" class="img-fluid"> <br><br>
 
               <p>Now we are all set to load the data into the database.</p> <br>
 
@@ -170,25 +170,25 @@
                 Using the <i>pymysql</i> package, the code below makes the connection to the database and creates the schema called <i>realty</i>.</p>
               
                 <code><pre>
-                  # Create a connection with the database service in local machine
-                  con = pymysql.connect(host ='db-realty.ctu8ks44oyou.us-east-1.rds.amazonaws.com', port=int(3306), user='admin', passwd='')
+              # Create a connection with the database service in local machine
+              con = pymysql.connect(host ='db-realty.ctu8ks44oyou.us-east-1.rds.amazonaws.com', port=int(3306), user='admin', passwd='')
 
-                  # Creating a cursor object
-                  cursor = con.cursor()
+              # Creating a cursor object
+              cursor = con.cursor()
 
-                  # Create a schema called realty
-                  cursor.execute('''
-                      DROP SCHEMA IF EXISTS realty;
-                  ''')
+              # Create a schema called realty
+              cursor.execute('''
+                  DROP SCHEMA IF EXISTS realty;
+              ''')
 
-                  cursor.execute('''
-                      CREATE SCHEMA realty;
-                  ''')
+              cursor.execute('''
+                  CREATE SCHEMA realty;
+              ''')
 
-                  # Use the new schema
-                  cursor.execute('''
-                      USE realty;
-                  ''')
+              # Use the new schema
+              cursor.execute('''
+                  USE realty;
+              ''')
                 </pre></code>
 
                 <p>After that, we create the sales, rents and sold tables. Below is an example of sales data table:</p>
@@ -196,50 +196,50 @@
 
 
                 <code><pre>
-                  # Create tables SALES
-                  cursor.execute('''
-                      CREATE TABLE sales (
-                          property_id VARCHAR(12),
-                          prop_type VARCHAR(20),
-                          prop_status VARCHAR(20),
-                          price INT,
-                          baths INT,
-                          beds FLOAT,
-                          address_city VARCHAR(50),
-                          address_line VARCHAR(200),
-                          address_state_code CHAR(2),
-                          address_state VARCHAR(50),
-                          address_county VARCHAR(50),
-                          addres_lat DOUBLE,
-                          address_lon DOUBLE,
-                          address_neighborhood_name VARCHAR(50)
-                      )
-                  ''')
+              # Create tables SALES
+              cursor.execute('''
+                  CREATE TABLE sales (
+                      property_id VARCHAR(12),
+                      prop_type VARCHAR(20),
+                      prop_status VARCHAR(20),
+                      price INT,
+                      baths INT,
+                      beds FLOAT,
+                      address_city VARCHAR(50),
+                      address_line VARCHAR(200),
+                      address_state_code CHAR(2),
+                      address_state VARCHAR(50),
+                      address_county VARCHAR(50),
+                      addres_lat DOUBLE,
+                      address_lon DOUBLE,
+                      address_neighborhood_name VARCHAR(50)
+                  )
+              ''')
                 </pre></code>
 
                 <p>To effectively load the data into the database, we run the code below for sales table, and the same is done for the other tables.</p>
 
 
                 <code><pre>
-                  # Convert the Dataframe into a list of arrays
-                  sales_tuples = tuple(sales.to_records(index=False))
+              # Convert the Dataframe into a list of arrays
+              sales_tuples = tuple(sales.to_records(index=False))
 
-                  for data in range(len(sales_tuples)):
-                      
-                      # Create a new record
-                      query = "INSERT INTO sales (property_id, prop_type, prop_status, price, baths, beds, address_city, address_line, address_state_code, address_state, \
-                          address_county, addres_lat, address_lon, address_neighborhood_name) VALUES {}".format(sales_tuples[data])
-                      
-                      # Execute the query
-                      cursor.execute(query)
+              for data in range(len(sales_tuples)):
+                  
+                  # Create a new record
+                  query = "INSERT INTO sales (property_id, prop_type, prop_status, price, baths, beds, address_city, address_line, address_state_code, address_state, \
+                      address_county, addres_lat, address_lon, address_neighborhood_name) VALUES {}".format(sales_tuples[data])
+                  
+                  # Execute the query
+                  cursor.execute(query)
                 </pre></code>
 
                 <p>Finally, we commit and close the connection:</p>
 
                 <code><pre>
-                  # Commit
-                  con.commit()
-                  con.close()
+              # Commit
+              con.commit()
+              con.close()
                 </pre></code>
 
                 <h4>MySQL Workbench</h4>
@@ -250,7 +250,7 @@
 
                 <p>We can see the data is there:</p>
 
-                <img src="assets/img/proj3/workbench_sales.png"><br><br>
+                <img src="assets/img/proj3/workbench_sales.png" class="img-fluid"><br><br>
 
 
                 <h4>AWS Lambda and Amazon EventBridge</h4>
@@ -259,21 +259,21 @@
                   To automate the entire ETL process, I used AWS Lambda service, which allows us to run code without having a server. I created a lambda function and added all the code shown earlier. For the external packages to work, it was necessary to add layers through the ARN found <a href="https://github.com/keithrozario/Klayers/tree/master/deployments/python3.8">here</a>.
                 </p>
 
-                <img src="assets/img/proj3/lambda.png">
+                <img src="assets/img/proj3/lambda.png" class="img-fluid">
 
                 <p>After that, a rule was created in Amazon EventBridge (CloudWatch Events) to schedule and automate the execution of the script. In the example below, I scheduled the run for once a day at 6 AM using a Cron expression.</p>
 
                 <code><pre>
-                  Cron expression
-                  0 6 * * ? *
+              Cron expression
+              0 6 * * ? *
 
-                  Next 10 trigger date(s)
+              Next 10 trigger date(s)
 
-                  Fri, 27 May 2022 06:00:00 GMT
-                  Sat, 28 May 2022 06:00:00 GMT
-                  . 
-                  . 
-                  .
+              Fri, 27 May 2022 06:00:00 GMT
+              Sat, 28 May 2022 06:00:00 GMT
+              . 
+              . 
+              .
                 </pre></code>
 
 
