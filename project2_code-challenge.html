@@ -99,13 +99,41 @@
             </div>
 
             <div class="portfolio-description">
-              <h2>Exploratory analysis in Google Play Store Apps dataset</h2>
+              <h2>Data Engineer code challenge</h2>
               <p>
-                This project.. (soon)
+                In this project, I solved the code challenge for the job of Data Engineer at Indicium company. The complete description of the challenge can be found <a href="https://github.com/arthursteffens/code-challenge">in this repository.</a>
               </p>
 
+              <p>Necessary tools:  
+                <ul>
+                  <li>Python (tested in version 3.11)</li>
+                  <li>pip (package manager)</li>
+                  <li>Docker (docker-compose)</li>
+                </ul>
+              </p>
+              
+              <h4>
+                Usage
+              </h4>
+              <p>
+                Follow this steps to properly run this script:
+                <ul>
+                <li>Clone <a href="https://github.com/arthursteffens/code-challenge">the repository</a> and navigate into it.</li>
+                <li>In repository folder, run <code>pip install -r requirements.txt </code>on terminal.</li>
+                <li>Run <code>docker-compose up -d</code> on terminal (wait until Postgres database populate tables. Run <code>docker logs code-challenge_pg_db_1</code> and check if the last line is something like this: <br><i>LOG: database system is ready to accept connections</i></li>
+                <li>After both containers are up, run <code>python pipeline.py</code></li>
+                </ul>
+              </p>
 
+              <h4>
+                Result
+              </h4>
+              <p>
+                Here is a screenshot of the full pipeline being executed:<br></p>
 
+                <img src="assets/img/proj2/step1.png"><br><br>
+                <img src="assets/img/proj2/step2.png">
+              
 
 
 
@@ -119,8 +147,8 @@
               <h3>Project information</h3>
               <ul>
                 <li><strong>Category:</strong> Data Analysis</li>
-                <li><strong>Project date:</strong> 25 March, 2022</li>
-                <li><strong>Project files:</strong> <a href="https://github.com/arthursteffens/personal-projects/tree/main/google-play-store-apps_EDA">On Github</a></li>
+                <li><strong>Project date:</strong> 13 July, 2022</li>
+                <li><strong>Project files:</strong> <a href="https://github.com/arthursteffens/code-challenge">On Github</a></li>
               </ul>
             </div>
             <!-- <div class="portfolio-description">
