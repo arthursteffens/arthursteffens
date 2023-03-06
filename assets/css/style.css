@@ -327,22 +327,22 @@ section {
   color: #173b6c;
 }
 
-.about .content ul {
+.about .content ul.personal-list {
   list-style: none;
   padding: 0;
 }
 
-.about .content ul li {
+.about .content ul.personal-list li {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
 
-.about .content ul strong {
+.about .content ul.personal-list strong {
   margin-right: 10px;
 }
 
-.about .content ul i {
+.about .content ul.personal-list i {
   font-size: 16px;
   margin-right: 5px;
   color: #149ddd;
@@ -351,6 +351,10 @@ section {
 
 .about .content p:last-child {
   margin-bottom: 0;
+}
+
+ul.training-list {
+  list-style-type: disc;
 }
 
 /*--------------------------------------------------------------
